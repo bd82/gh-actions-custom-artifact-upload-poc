@@ -4,6 +4,7 @@
   "private": true,
   "packageManager": "pnpm@9.15.2",
   "scripts": {
+    "ci" : "echo 'running dummy CI script...'"
   },
   "devDependencies": {
   }

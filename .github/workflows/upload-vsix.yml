@@ -22,17 +22,19 @@ jobs:
         # pnpm version from package.json `packageManager` field is used
         uses: pnpm/action-setup@v4
 
-#      - name: Install dependencies
-#        run: pnpm install
-#
-#      - name: Build
-#        run: pnpm run ci
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run ci
+
       - uses: actions/github-script@v6
-        id: id-vsix-to-upload
+        id: path-of-vsix-to-upload
         with:
           script: |
-            console.log(process.env)
-            return "alpha-v1.0.0"
+            const verNameRegex = /refs\/tags\/@\w+\/(?<pkgName>[a-z][a-z0-9]+)@(?<pkgVer>\d+\.\d+\.\d+)/;
+            const { groups: { pkgName, pkgVer } } = verNameRegex.exec(process.env.GITHUB_REF);
+            return `${pkgName}/${pkgName}-${pkgVer}.vsix`;
           result-encoding: string
 
       - name: Get result
@@ -44,6 +46,5 @@ jobs:
       - name: Create Github Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{steps.id-vsix-to-upload.outputs.result}}
-          files: packages/alpha/${{steps.id-vsix-to-upload.outputs.result}}.vsix
+          files: packages/${{steps.path-of-vsix-to-upload.result}}
           fail_on_unmatched_files: true

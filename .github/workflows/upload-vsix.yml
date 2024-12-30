@@ -1,8 +1,8 @@
 name: Release
 on:
   push:
-    branches:
-      - master
+#    branches:
+#      - master
     # Note we must specify a tag for each pkg containing a vsix file.
     # or must we? should we include this allow-set in the script?
     tags:

@@ -4,7 +4,6 @@ on:
 #    branches:
 #      - master
     # Note we must specify a tag for each pkg containing a vsix file.
-    # or must we? should we include this allow-set in the script?
     tags:
       - "@scope/alpha@[0-9]+.[0-9]+.[0-9]+"
       - "@scope/gamma@[0-9]+.[0-9]+.[0-9]+"
@@ -32,15 +31,13 @@ jobs:
         id: path-of-vsix-to-upload
         with:
           script: |
-            const verNameRegex = /refs\/tags\/@\w+\/(?<pkgName>[a-z][a-z0-9]+)@(?<pkgVer>\d+\.\d+\.\d+)/;
+            console.log(process.env);
+            const verNameRegex = /refs\/tags\/@\w+\/(?<pkgName>[a-z][a-z0-9-]+)@(?<pkgVer>\d+\.\d+\.\d+)/;
             const { groups: { pkgName, pkgVer } } = verNameRegex.exec(process.env.GITHUB_REF);
             return `${pkgName}/${pkgName}-${pkgVer}.vsix`;
           result-encoding: string
 
       - name: Get result
-        # TODO: 1. how to get tag name (ref?)?
-        # TODO: 2. bulid vsix file name from tag name
-        # TODO: 3. include folder name in vsix name?
         run: echo "${{steps.id-vsix-to-upload.outputs.result}}"
 
       - name: Create Github Release

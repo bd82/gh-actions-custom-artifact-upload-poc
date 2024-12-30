@@ -33,7 +33,6 @@ jobs:
           script: |
             const verNameRegex = /refs\/tags\/@\w+\/(?<pkgName>[a-z][a-z0-9-]+)@(?<pkgVer>\d+\.\d+\.\d+)/
             const { groups: { pkgName, pkgVer } } = verNameRegex.exec('refs/tags/@scope/gamma@3.2.0')
-#            return `${pkgName}/${pkgName}-${pkgVer}.vsix`
             return "bamba"
           result-encoding: string
 

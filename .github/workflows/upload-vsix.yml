@@ -1,8 +1,8 @@
 name: Release
 on:
   push:
-#    branches:
-#      - master
+    branches:
+      - master
     # Note we must specify a tag for each pkg containing a vsix file.
     tags:
       - "@scope/alpha@[0-9]+.[0-9]+.[0-9]+"
@@ -31,10 +31,9 @@ jobs:
         id: path-of-vsix-to-upload
         with:
           script: |
-            console.log(process.env);
-            const verNameRegex = /refs\/tags\/@\w+\/(?<pkgName>[a-z][a-z0-9-]+)@(?<pkgVer>\d+\.\d+\.\d+)/;
-            const { groups: { pkgName, pkgVer } } = verNameRegex.exec(process.env.GITHUB_REF);
-            return `${pkgName}/${pkgName}-${pkgVer}.vsix`;
+            const verNameRegex = /refs\/tags\/@\w+\/(?<pkgName>[a-z][a-z0-9-]+)@(?<pkgVer>\d+\.\d+\.\d+)/
+            const { groups: { pkgName, pkgVer } } = verNameRegex.exec('refs/tags/@scope/gamma@3.2.0')
+            return `${pkgName}/${pkgName}-${pkgVer}.vsix`
           result-encoding: string
 
       - name: Get result

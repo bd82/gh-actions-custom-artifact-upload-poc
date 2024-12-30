@@ -30,7 +30,6 @@ jobs:
         with:
           script: |
             const verNameRegex = /refs\/tags\/@\w+\/(?<pkgName>[a-z][a-z0-9-]+)@(?<pkgVer>\d+\.\d+\.\d+)/;
-            console.log(process.env.GITHUB_REF);
             const { groups: { pkgName, pkgVer } } = verNameRegex.exec(process.env.GITHUB_REF);
             return `${pkgName}/${pkgName}-${pkgVer}.vsix`;
           result-encoding: string

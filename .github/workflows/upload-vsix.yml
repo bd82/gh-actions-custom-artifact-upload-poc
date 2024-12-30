@@ -27,8 +27,6 @@ jobs:
 #
 #      - name: Build
 #        run: pnpm run ci
-
-      - name: ID vsix to upload
       - uses: actions/github-script@v6
         id: id-vsix-to-upload
         with:

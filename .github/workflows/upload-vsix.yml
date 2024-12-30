@@ -1,8 +1,6 @@
 name: Release
 on:
   push:
-    branches:
-      - master
     # Note we must specify a tag for each pkg containing a vsix file.
     tags:
       - "@scope/alpha@[0-9]+.[0-9]+.[0-9]+"
@@ -32,12 +30,10 @@ jobs:
         with:
           script: |
             const verNameRegex = /refs\/tags\/@\w+\/(?<pkgName>[a-z][a-z0-9-]+)@(?<pkgVer>\d+\.\d+\.\d+)/;
-            const { groups: { pkgName, pkgVer } } = verNameRegex.exec('refs/tags/@scope/gamma@3.2.0');
+            console.log(process.env.GITHUB_REF);
+            const { groups: { pkgName, pkgVer } } = verNameRegex.exec(process.env.GITHUB_REF);
             return `${pkgName}/${pkgName}-${pkgVer}.vsix`;
           result-encoding: string
-
-      - name: Get result
-        run: echo "${{steps.path-of-vsix-to-upload.outputs.result}}"
 
       - name: Create Github Release
         uses: softprops/action-gh-release@v2

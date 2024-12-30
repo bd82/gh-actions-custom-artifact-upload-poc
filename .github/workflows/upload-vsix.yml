@@ -34,7 +34,7 @@ jobs:
           result-encoding: string
 
       - name: Get result
-        run: echo "${{steps.id-vsix-to-upload.outputs.result}}
+        run: echo "${{steps.id-vsix-to-upload.outputs.result}}"
 
 #      - name: Create Github Release
 #        uses: softprops/action-gh-release@v1

@@ -31,7 +31,6 @@ jobs:
         id: path-of-vsix-to-upload
         with:
           script: |
-            const verNameRegex = /refs\/tags\/@\w+\/(?<pkgName>[a-z][a-z0-9-]+)@(?<pkgVer>\d+\.\d+\.\d+)/
             return "bamba"
           result-encoding: string
 

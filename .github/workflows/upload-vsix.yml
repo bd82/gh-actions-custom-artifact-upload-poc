@@ -37,7 +37,8 @@ jobs:
         run: echo "${{steps.id-vsix-to-upload.outputs.result}}"
 
       - name: Create Github Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
-          files: packages/alpha/${{steps.id-vsix-to-upload.outputs.result}}
+          tag_name: ${{steps.id-vsix-to-upload.outputs.result}}
+          files: packages/alpha/${{steps.id-vsix-to-upload.outputs.result}}.vsix
           fail_on_unmatched_files: true

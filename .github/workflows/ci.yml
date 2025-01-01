@@ -60,9 +60,9 @@ jobs:
           commit: "chore: version packages"
           version: pnpm run ci:version
           publish: pnpm run ci:release
-#        env:
+        env:
           # See: https://github.com/changesets/action/issues/187#issuecomment-1228413850
-#          GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - uses: actions/github-script@v7

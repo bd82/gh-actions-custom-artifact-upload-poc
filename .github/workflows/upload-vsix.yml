@@ -1,10 +1,10 @@
 name: Release
-on:
-  push:
-    # Note we must specify a tag for each pkg containing a vsix file.
-    tags:
-      - "@scope/alpha@[0-9]+.[0-9]+.[0-9]+"
-      - "@scope/gamma@[0-9]+.[0-9]+.[0-9]+"
+#on:
+#  push:
+#    # Note we must specify a tag for each pkg containing a vsix file.
+#    tags:
+#      - "@scope/alpha@[0-9]+.[0-9]+.[0-9]+"
+#      - "@scope/gamma@[0-9]+.[0-9]+.[0-9]+"
 jobs:
   upload-vsix:
     runs-on: ubuntu-latest
@@ -35,7 +35,19 @@ jobs:
           result-encoding: string
 
       - name: Create Github Release
+        id: create_github_release
         uses: softprops/action-gh-release@v2
         with:
           files: packages/${{steps.path-of-vsix-to-upload.outputs.result}}
           fail_on_unmatched_files: true
+
+      - uses: actions/github-script@v6
+        id: path-of-vsix-to-upload
+        env:
+          SHA: ${{steps.create_github_release.outputs.}}
+        with:
+          script: |
+            const verNameRegex = /refs\/tags\/@\w+\/(?<pkgName>[a-z][a-z0-9-]+)@(?<pkgVer>\d+\.\d+\.\d+)/;
+            const { groups: { pkgName, pkgVer } } = verNameRegex.exec(process.env.GITHUB_REF);
+            return `${pkgName}/${pkgName}-${pkgVer}.vsix`;
+          result-encoding: string

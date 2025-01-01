@@ -2,10 +2,16 @@
   "name": "root",
   "version": "1.0.0",
   "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
   "packageManager": "pnpm@9.15.2",
   "scripts": {
     "ci" : "echo 'running dummy CI script...'"
   },
   "devDependencies": {
+    "@changesets/cli": "2.27.11"
   }
 }

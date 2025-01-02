@@ -54,7 +54,7 @@ jobs:
         # after merge to master
         # - https://github.com/changesets/changesets/blob/main/docs/versioning-apps.md
         # - Our `private:true` packages (mainly VSIX) are treated as `apps` by changesets
-       # if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request'
         with:
           title: "chore: version packages"
           commit: "chore: version packages"

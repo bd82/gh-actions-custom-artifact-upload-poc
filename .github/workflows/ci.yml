@@ -54,7 +54,7 @@ jobs:
         # after merge to master
         # - https://github.com/changesets/changesets/blob/main/docs/versioning-apps.md
         # - Our `private:true` packages (mainly VSIX) are treated as `apps` by changesets
-        if: github.event_name != 'pull_request'
+       # if: github.event_name != 'pull_request'
         with:
           title: "chore: version packages"
           commit: "chore: version packages"
@@ -70,7 +70,7 @@ jobs:
 
       - name: Wait for GH Releases to be published
         if: steps.create_or_update_release_pr.outputs.published == 'true'
-        run: sleep 100s
+        run: sleep 10s
         shell: bash
 
       - name:

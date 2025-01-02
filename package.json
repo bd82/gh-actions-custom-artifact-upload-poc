@@ -11,9 +11,12 @@
   "scripts": {
     "ci:version": "pnpm changeset version && pnpm i --lockfile-only",
     "ci:release": "pnpm changeset publish",
-    "ci" : "echo 'running dummy CI script...'"
+    "ci": "echo 'running dummy CI script...'"
   },
   "devDependencies": {
-    "@changesets/cli": "2.27.11"
+    "@changesets/cli": "2.27.11",
+    "@types/github-script": "github:actions/github-script",
+    "octokit" : "4.0.3",
+    "dotenv": "16.4.7"
   }
 }
